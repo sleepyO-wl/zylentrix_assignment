@@ -1,17 +1,19 @@
-# flutter_api_fetch
+# Flutter API Fetch
 
-A new Flutter project.
+## Overview
+This Flutter application fetch and display data from a REST API using the `http` package. The application retrieves posts from `https://jsonplaceholder.typicode.com/posts` and presents them in a scrollable ListView.
 
-## Getting Started
+## Features
+- **API Integration**: Fetches data from a public API.
+- **Elegant UI**: Displays posts with a card-based design.
+- **Loading Indicator**: Shows a `CircularProgressIndicator` while fetching data.
+- **Error Handling**: Displays a user-friendly error message if the API request fails.
+- **Optimized Performance**: Uses `setState` efficiently to update UI dynamically.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# zylentrix_assignment
+## Setup Instructions
+### Prerequisites
+- Ensure you have **Flutter SDK** installed. [Install Flutter](https://flutter.dev/docs/get-started/install)
+- Clone this repository and navigate to the project folder:
+  ```bash
+  git clone <repository-url>
+  cd <project-folder>
