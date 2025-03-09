@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     print('Building MyApp');
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter API Fetch',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: PostListScreen(),
