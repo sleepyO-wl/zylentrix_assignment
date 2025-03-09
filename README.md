@@ -15,5 +15,11 @@ This Flutter application fetch and display data from a REST API using the `http`
 - Ensure you have **Flutter SDK** installed. [Install Flutter](https://flutter.dev/docs/get-started/install)
 - Clone this repository and navigate to the project folder:
   ```bash
-  git clone <repository-url>
-  cd <project-folder>
+  git clone "https://github.com/sleepyO-wl/zylentrix_assignment"
+  cd zylentrix_assignment
+- Install required dependencies:
+  ```bash
+  flutter pub get
+- To run the app, execute the following command:
+  ```bash
+  flutter run
