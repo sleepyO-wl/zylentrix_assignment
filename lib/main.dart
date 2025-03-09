@@ -3,24 +3,29 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 void main() {
-  print('App started');
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    print('Building MyApp');
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter API Fetch',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: PostListScreen(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: const PostListScreen(),
     );
   }
 }
 
 class PostListScreen extends StatefulWidget {
+  const PostListScreen({super.key});
+
   @override
   _PostListScreenState createState() => _PostListScreenState();
 }
@@ -33,26 +38,22 @@ class _PostListScreenState extends State<PostListScreen> {
   @override
   void initState() {
     super.initState();
-    print('PostListScreen initialized');
     fetchPosts();
   }
 
   Future<void> fetchPosts() async {
-    print('Fetching posts...');
     try {
-      final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
-      print('Response received with status code: ${response.statusCode}');
+      final response = await http
+          .get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
       if (response.statusCode == 200) {
         setState(() {
           posts = json.decode(response.body);
           isLoading = false;
         });
-        print('Posts fetched successfully, total: ${posts.length}');
       } else {
         throw Exception('Failed to load posts');
       }
     } catch (e) {
-      print('Error fetching posts: $e');
       setState(() {
         isLoading = false;
         errorMessage = e.toString();
@@ -62,22 +63,56 @@ class _PostListScreenState extends State<PostListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('Building PostListScreen');
     return Scaffold(
-      appBar: AppBar(title: Text('Posts')),
+      appBar: AppBar(
+        title:
+            const Text('Posts', style: TextStyle(fontWeight: FontWeight.bold)),
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
+      ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : errorMessage.isNotEmpty
-              ? Center(child: Text(errorMessage, style: TextStyle(color: Colors.red)))
+              ? Center(
+                  child: Text(
+                    errorMessage,
+                    style: const TextStyle(
+                        color: Colors.red,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
+                )
               : ListView.builder(
+                  padding: const EdgeInsets.all(10),
                   itemCount: posts.length,
                   itemBuilder: (context, index) {
-                    print('Building ListTile for post ${index + 1}');
                     return Card(
-                      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                      child: ListTile(
-                        title: Text(posts[index]['title'], style: TextStyle(fontWeight: FontWeight.bold)),
-                        subtitle: Text(posts[index]['body']),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12)),
+                      elevation: 5,
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 10),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              posts[index]['title'],
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blueAccent,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              posts[index]['body'],
+                              style: const TextStyle(
+                                  fontSize: 16, color: Colors.black87),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
